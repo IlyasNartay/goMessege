@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package auth_service;
+option go_package = "/auth-service/proto";
+
+// Определение сервиса для аутентификации и авторизации
+service AuthService {
+  // Метод для регистрации нового пользователя
+  rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
+
+  // Метод для входа пользователя
+  rpc Login(LoginRequest) returns (LoginResponse);
+
+  // Метод для обновления токена доступа
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+}
+
+// Запрос на регистрацию нового пользователя
+message RegisterUserRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// Ответ на запрос регистрации нового пользователя
+message RegisterUserResponse {
+  string message = 1;
+}
+
+// Запрос на вход пользователя
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// Ответ на запрос входа пользователя
+message LoginResponse {
+  string token = 1;
+}
+
+// Запрос на обновление токена доступа
+message RefreshTokenRequest {
+  string refreshToken = 1;
+}
+
+// Ответ на запрос обновления токена доступа
+message RefreshTokenResponse {
+  string token = 1;
+}
